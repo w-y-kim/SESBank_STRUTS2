@@ -64,4 +64,20 @@ public class CustomerDAO {
 		}
 		return result; 
 	}
+	
+	public boolean selectCusById(String checkedID){
+		boolean result = false; 
+		try {
+			sqlSess = sqlSessfac.openSession();
+			result = sqlSess.selectOne("Customer.idCheck",checkedID); 
+			sqlSess.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (sqlSess != null)
+				sqlSess.close();
+		}
+		
+		return result; 
+	}
 }

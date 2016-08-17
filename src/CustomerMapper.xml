@@ -18,7 +18,8 @@
 		</where>
 	</select>
 	
-	<select id="idCheck">
+	<select id="idCheck" parameterType="String" resultType="boolean">
+		SELECT * FROM CUSTOMER WHERE CUSTID = #{str}
 	</select>
 
 	<!-- insert는 리절트타입이 필요없다. 파라미터타입이 User형태로 줘도 되지만 .. String으로 했으니 UserDAO에서 

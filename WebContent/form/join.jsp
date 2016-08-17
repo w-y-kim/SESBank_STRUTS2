@@ -63,16 +63,10 @@ li input {
 	function idCheck() {
 		alert("중복확인");
 		var id = document.getElementById("custid").value; //TODO name속성으로 가져오면 안되는 이유는? 
-/* 
-				window.open("idCheck.jsp", "아이디체크", 'scrollbars=no,width=400,height=300,status=no,resizable=no');
-		
- */ 
- /*get방식? 쿼리스트링으로 id 필드입력값 보낸다.*/
-		window.open("idCheck.jsp?checkedID=" + id + "", "a", "width=400, height=300, left=100, top=50");
 
- 
- 
- 
+ /*get방식? 쿼리스트링으로 id 필드입력값 보낸다.*/
+		window.open("check.action?checkedID=" + id + "", "a", "width=400, height=300, left=100, top=50");
+  
   }
 </script>
 

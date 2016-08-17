@@ -19,6 +19,10 @@ public class CustomerAction extends ActionSupport {
 	private String identify;
 	private String addr;
 	
+	//아이디 체크
+	private String checkedID; 
+	private boolean checkResult; 
+	
 	public String execute() {
 		System.out.println("실행");
 		return SUCCESS;
@@ -43,8 +47,10 @@ public class CustomerAction extends ActionSupport {
 	}
 	
 	public String idCheck() throws Exception{
-		
-		
+		System.out.println("idCheck 실행");
+		System.out.println(checkedID);
+//		checkResult = dao.selectCusById(checkedID);
+//		
 		return SUCCESS; 
 	}
 	
@@ -120,6 +126,22 @@ public class CustomerAction extends ActionSupport {
 
 	public void setAddr(String addr) {
 		this.addr = addr;
+	}
+
+	public String getCheckedID() {
+		return checkedID;
+	}
+
+	public void setCheckedID(String checkedID) {
+		this.checkedID = checkedID;
+	}
+
+	public boolean isCheckResult() {
+		return checkResult;
+	}
+
+	public void setCheckResult(boolean checkResult) {
+		this.checkResult = checkResult;
 	}
 
 	

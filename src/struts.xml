@@ -30,6 +30,15 @@
 		<action name="join">
 			<result>/form/join.jsp</result>
 		</action>
+
+		<action name="check">
+			<result>/form/idCheck.jsp</result>
+		</action>
+		<action name="idcheck" class="action.CustomerAction" method="idCheck">
+			<result>/form/idCheck.jsp</result>
+		</action>
+	
+		
 	
 		<action name="joinResult" class="action.CustomerAction" method="insertCustomer">
 			<result name="success">index.jsp</result>
