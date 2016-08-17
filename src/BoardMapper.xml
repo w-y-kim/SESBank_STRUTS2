@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Board">
+	<!-- UserMapper.xml의 Mapper태그의 namespace값은 UserDAO.java에서 사용 -->
+	<!-- 가령 User.insertUser 라는 스트링을 파라미터값으로 쓴다. -->
+
+
+	<select id="selectList" parameterType="Board" resultType="Board">
+		select * from
+	      (select rownum r, b.* from
+			(select boardnum, id, title, to_char(inputdate, 'YYYY/MM/DD') inputdate, hits from board2 order by boardnum desc) b)
+	    where r between #{startNum} and #{endNum}
+	</select>
+
+	<select id="selectWrite" parameterType="String" resultType="Board">
+		SELECT * FROM board2 where boardnum = #{boardnum}
+	</select>
+
+</mapper>

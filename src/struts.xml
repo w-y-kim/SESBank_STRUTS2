@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+
+	<constant name="struts.enable.DynamicMethodInvocation" value="false" />
+	<constant name="struts.devMode" value="true" />
+
+	<package name="default" namespace="/" extends="struts-default">
+
+		<default-action-ref name="default"></default-action-ref>
+		<action name="default">
+			<result>index.jsp</result>
+		</action>
+
+		<action name="boardList" class="action.BoardAction" method="boardList">
+			<result name="success">index.jsp</result>
+		</action>
+		<action name="boardView" class="action.BoardAction" method="boardView">
+			<result name="success">index.jsp</result>
+		</action>
+
+	</package>
+
+
+	<package name="cus" namespace="/" extends="struts-default">
+
+		<action name="join">
+			<result>/form/join.jsp</result>
+		</action>
+	
+		<action name="joinResult" class="action.CustomerAction" method="insertCustomer">
+			<result name="success">index.jsp</result>
+		</action>
+
+
+		<action name="selectCusIf" class="action.CustomerAction" method="selectCusIf">
+			<result name="success">index.jsp</result>
+		</action>
+
+	</package>
+
+
+</struts>

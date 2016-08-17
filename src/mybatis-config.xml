@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+	<!-- DB접속정보 값을 가지고 있는 파일 설정 -->
+	<properties resource="db.properties"></properties>
+
+	<!-- 여기있어야함 -->
+	<typeAliases>
+		<!-- type은 java 파일 경로 , alias는 별칭 UserMapper에서 사용 -->
+		<typeAlias alias="Board" type="vo.Board" />
+		<typeAlias alias="Customer" type="vo.Customer" />
+	</typeAliases>
+
+	<!-- DB접속정보 세팅 -->
+	<environments default="development">
+		<environment id="development">
+			<transactionManager type="JDBC" />
+			<dataSource type="POOLED">
+				<!-- db.properties를 불러오는 부분 밸류값 직접입력해도됨 -->
+				<property name="driver" value="${driver}" />
+				<property name="url" value="${url}" />
+				<property name="username" value="${username}" />
+				<property name="password" value="${password}" />
+			</dataSource>
+		</environment>
+	</environments>
+
+	<mappers>
+		<mapper resource="BoardMapper.xml" />
+		<mapper resource="CustomerMapper.xml" />
+	</mappers>
+
+
+</configuration>
