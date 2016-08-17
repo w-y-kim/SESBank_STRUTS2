@@ -14,6 +14,14 @@ li label {
 	text-align: left;
 	padding-left: 0px;
 	padding-right: 30px;
+	
+	width:150px;
+	float:left;
+	font-size:20px;
+	font-weight:bold;
+	color:blue;
+	line-height:30px;
+	
 }
 
 input[type=submit], input[type=reset] {
@@ -23,12 +31,10 @@ input[type=submit], input[type=reset] {
 }
 
 li input {
-	
+	font-size:20px;
 }
 </style>
 <script type="text/javascript">
-
-
 	function check() {
 		var id = document.getElementById('custid');
 		var pw = document.getElementById('pw');
@@ -64,14 +70,17 @@ li input {
 		alert("중복확인");
 		var id = document.getElementById("custid").value; //TODO name속성으로 가져오면 안되는 이유는? 
 
- /*get방식? 쿼리스트링으로 id 필드입력값 보낸다.*/
-		window.open("check.action?checkedID=" + id + "", "a", "width=400, height=300, left=100, top=50");
-  
-  }
+		/*get방식? 쿼리스트링으로 id 필드입력값 보낸다.*/
+		window.open("check.action?checkedID=" + id + "", "a",
+				"width=400, height=300, left=100, top=50");
+
+	}
 </script>
 
 </head>
-<body>
+<body>	<div style="position:fixed;margin:50px auto;margin-left:600px;overflow: hidden">
+		<img src="https://mir-s3-cdn-cf.behance.net/project_modules/disp/079b3c20508765.562ec6fba5f52.gif" width="90%">
+	</div>
 	<form action="joinResult.action" method="post"
 		onsubmit="return check()">
 		<fieldset>
@@ -79,7 +88,8 @@ li input {
 			<ul>
 				<li><label for="custid">고객 ID</label><input name="custid"
 					autofocus type="text" id="custid" placeholder="ID를 3~10자로 입력">
-					<input type="button" onClick="idCheck()" value="ID체크" required></li>
+					<input type="button" onClick="idCheck()" value="ID체크" required>
+				</li>
 				<li><label for="pw">비밀번호</label><input name="pw"
 					type="password" id="pw" placeholder="Password를 3~10자로 입력"></li>
 				<li><label for="pw2">비밀번호 확인</label><input type="password"
@@ -100,5 +110,6 @@ li input {
 			</ul>
 		</fieldset>
 	</form>
+
 </body>
 </html>

@@ -1,6 +1,7 @@
 package dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -14,12 +15,12 @@ public class CustomerDAO {
 	ArrayList<Customer> result = null;
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public ArrayList<Customer> list(Customer customer) {
+	public ArrayList<Customer> list(String type) {
 		ArrayList<Customer> result = null;
-		System.out.println("dao 파라미터 출력: " + customer);
+		System.out.println("dao 파라미터 출력: " + type);
 		try {
 			sqlSess = sqlSessfac.openSession();
-			result = (ArrayList) sqlSess.selectList("Customer.selectList", customer);
+			result = (ArrayList) sqlSess.selectList("Customer.selectList", type);
 			sqlSess.commit();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -36,9 +37,10 @@ public class CustomerDAO {
 		boolean result = false;
 		try {
 			sqlSess = sqlSessfac.openSession();
-			int cnt = sqlSess.insert("Customer.insertCustomer",customer);
-			if(cnt>0) result = true; 
-			
+			int cnt = sqlSess.insert("Customer.insertCustomer", customer);
+			if (cnt > 0)
+				result = true;
+
 			sqlSess.commit();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -46,15 +48,14 @@ public class CustomerDAO {
 			if (sqlSess != null)
 				sqlSess.close();
 		}
-		return result; 
+		return result;
 	}
-	
-	
+
 	public Customer selectCusIf(Customer customer) {
 		Customer result = null;
 		try {
 			sqlSess = sqlSessfac.openSession();
-			result = sqlSess.selectOne("Customer.selectCusIf",customer); 
+			result = sqlSess.selectOne("Customer.selectCusIf", customer);
 			sqlSess.commit();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -62,22 +63,24 @@ public class CustomerDAO {
 			if (sqlSess != null)
 				sqlSess.close();
 		}
-		return result; 
+		return result;
 	}
-	
-	public boolean selectCusById(String checkedID){
-		boolean result = false; 
+
+	public boolean selectCusById(String checkedID) {
+		boolean result = false;
 		try {
 			sqlSess = sqlSessfac.openSession();
-			result = sqlSess.selectOne("Customer.idCheck",checkedID); 
+			Customer cus = sqlSess.selectOne("Customer.idCheck", checkedID);
 			sqlSess.commit();
+
+			if(cus != null) result = true;  
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			if (sqlSess != null)
 				sqlSess.close();
 		}
-		
-		return result; 
+
+		return result;
 	}
 }

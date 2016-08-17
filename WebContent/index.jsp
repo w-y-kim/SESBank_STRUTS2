@@ -10,16 +10,16 @@
 
 <link rel="stylesheet" href="main.css">
 </head>
-<%
-	String absolutePath = application.getRealPath("");
-%>
-<%=absolutePath%>
+
 <body>
 	<header id="main_header">
 
 		<hgroup id="title">
-			<h1>BMO은행</h1>
-			<h2>Struts + myBatis 사용해 게시판 만들기</h2>
+			<a href="index.action">
+			
+			<h1 style="background-color:aqua;text-align:center;border:5px dotted black;top: 50%;height::50px;margin-top:25px;">BMO은행</h1>
+			</a>
+			<h2>Struts + myBatis</h2>
 		</hgroup>
 		<nav id="main_gnb">
 			<!--global navigation bar-->
@@ -28,7 +28,7 @@
 				<li><a href="">로그인</a></li>
 				<li><a href="">정보수정</a></li>
 				<li><a href="">로그아웃</a></li>
-				<li><a href="">회원조회</a></li>
+				<li><a href="list.action">회원조회</a></li>
 			</ul>
 
 			<!-- 
@@ -44,9 +44,9 @@
 			<ul>
 				<li><a href="boardList.action">게시판1</a></li>
 				<li><a href="#">게시판2</a></li>
-				<li><a href="#">JS</a></li>
-				<li><a href="#">JQuery</a></li>
-				<li><a href="#">Node.js</a></li>
+				<li><a href="#">게시판3</a></li>
+				<li><a href="#">게시판4</a></li>
+				<li><a href="#">게시판5</a></li>
 			</ul>
 		</nav>
 	</header>
@@ -70,6 +70,12 @@
 					<jsp:include page="/bbs/BoardList.jsp"></jsp:include>
 				</article>
 			</c:if>
+			
+			<c:if test="${cusList ne null}">
+				<article class="main_article">
+					<jsp:include page="/form/CustomerList.jsp"></jsp:include>
+				</article>
+			</c:if>
 
 
 
@@ -87,8 +93,11 @@
 
 
 	<footer id="main_footer">
+		<%String absolutePath = application.getRealPath("");%><%=absolutePath%>
 		<h3>HTML5 + CSS3 Basic</h3>
 		<address>website layout basic</address>
+	
+
 	</footer>
 </body>
 

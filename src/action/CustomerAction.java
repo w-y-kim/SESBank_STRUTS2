@@ -1,5 +1,8 @@
 package action;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 import com.opensymphony.xwork2.ActionSupport;
 
 import dao.CustomerDAO;
@@ -22,6 +25,9 @@ public class CustomerAction extends ActionSupport {
 	//아이디 체크
 	private String checkedID; 
 	private boolean checkResult; 
+	
+	//접속자목록 
+	private ArrayList<Customer> cusList; 
 	
 	public String execute() {
 		System.out.println("실행");
@@ -48,11 +54,24 @@ public class CustomerAction extends ActionSupport {
 	
 	public String idCheck() throws Exception{
 		System.out.println("idCheck 실행");
-		System.out.println(checkedID);
-//		checkResult = dao.selectCusById(checkedID);
-//		
+		checkResult = dao.selectCusById(checkedID);
 		return SUCCESS; 
 	}
+	
+	public String selectCusList() throws Exception{
+		System.out.println("selectCusList 실행");
+		cusList = dao.list("private");
+		System.out.println("리스트(액션) : "+cusList);
+		return SUCCESS; 
+	}
+	
+	
+	public String login() throws Exception{ 
+		
+		return LOGIN; 
+	}
+	
+	
 	
 	//get&set
 
@@ -144,6 +163,21 @@ public class CustomerAction extends ActionSupport {
 		this.checkResult = checkResult;
 	}
 
+	public ArrayList<Customer> getCusList() {
+		return cusList;
+	}
+
+	public void setCusList(ArrayList<Customer> cusList) {
+		this.cusList = cusList;
+	}
+
+
+
+
+
+
+
+	
 	
 		
 }

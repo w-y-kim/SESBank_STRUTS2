@@ -17,9 +17,15 @@
 			<if test="custid == null"> CUSTID = '111'</if>
 		</where>
 	</select>
+
+	<select id="idCheck" parameterType="String" resultType="Customer">
+		SELECT *
+		FROM CUSTOMER WHERE CUSTID = #{str}
+	</select>
 	
-	<select id="idCheck" parameterType="String" resultType="boolean">
-		SELECT * FROM CUSTOMER WHERE CUSTID = #{str}
+	<select id="selectList" parameterType="String" resultType="HashMap">
+		SELECT * 
+		FROM CUSTOMER WHERE DIVISION = #{type, jdbcType=VARCHAR}<!-- not null조건 컬럼인데 초기 클래스 로딩 시 string이 ""로 들어가서 -->
 	</select>
 
 	<!-- insert는 리절트타입이 필요없다. 파라미터타입이 User형태로 줘도 되지만 .. String으로 했으니 UserDAO에서 
@@ -27,8 +33,7 @@
 		넘겨줄 때 어떤 형으로 넘겨줄 것인지를 지정 parameterType은 편한대로 사용하면 됨. 하나만 받을거면 String이 편하지뭐 
 		<select id="selectUser" parameterType="String" resultType="Customer"> paramType 
 		스트링이라 대소문자 구분 x , 유저였다면 변수 브이오랑 맞췄어야 SELECT * FROM T_USER WHERE USERID=#{userid} 
-		#{sadsd}이렇게 적어도됨, 어차피 하나 </select> <select id="selectUserList" resultType="Customer"> 
-		SELECT * FROM T_User </select> <update id="updateUser" parameterType="Customer"> 
+		#{sadsd}이렇게 적어도됨, 어차피 하나 </select> <update id="updateUser" parameterType="Customer"> 
 		UPDATE T_USER SET USERPW = #{userPw}, USERNAME = #{userName} WHERE USERID 
 		= #{userId} </update> <select id="selectUserHash" parameterType="String" 
 		resultType="HashMap"> SELECT * FROM T_USER WHERE USERID=#{userid} </select> -->

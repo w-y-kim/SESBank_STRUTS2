@@ -6,7 +6,7 @@
 <struts>
 
 	<constant name="struts.enable.DynamicMethodInvocation" value="false" />
-	<constant name="struts.devMode" value="true" />
+	<constant name="struts.devMode" value="false" />
 
 	<package name="default" namespace="/" extends="struts-default">
 
@@ -46,6 +46,10 @@
 
 
 		<action name="selectCusIf" class="action.CustomerAction" method="selectCusIf">
+			<result name="success">index.jsp</result>
+		</action>
+		<!-- 회원조회 -->
+		<action name="list" class="action.CustomerAction" method="selectCusList">
 			<result name="success">index.jsp</result>
 		</action>
 

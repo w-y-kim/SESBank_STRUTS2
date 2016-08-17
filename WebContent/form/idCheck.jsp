@@ -16,14 +16,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
-<%
-	//팝업창의 URL의 id값을 필드에 넣어주기 위한 
-	//서블릿에서 forward로 넘겨준 request 다시 받음 
-	String inputID = request.getParameter("checkedID");
-	System.out.println("리퀘스트(jsp) : " + inputID);
-	String returnID = (String) request.getAttribute("id");
-	System.out.println("리턴 (jsp) : " + returnID);
-%>
+
 <body>
 	<form action="idcheck.action" method="post">
 		<!-- post방식으로 보내는 경우는 form태그 안의 value가 들어가기 때문에 hidden을 써주어야 한다 -->
@@ -41,7 +34,7 @@
 			<c:if test="${checkResult == false}">
 				<tr>
 					<td>확인결과</td>
-					<td>${param.custid}사용가능</td>
+					<td>${checkedID}사용가능</td>
 					<td rowspan="1"><input type="button" value="사용하기"
 						onClick="idSelected('${param.checkedID}')"></td>
 				</tr>
