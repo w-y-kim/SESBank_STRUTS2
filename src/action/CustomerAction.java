@@ -2,18 +2,21 @@ package action;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
+
+import org.apache.struts2.interceptor.SessionAware;
 
 import com.opensymphony.xwork2.ActionSupport;
 
 import dao.CustomerDAO;
 import vo.Customer;
 
-public class CustomerAction extends ActionSupport {
-	
-	CustomerDAO dao = new CustomerDAO(); 
+public class CustomerAction extends ActionSupport implements SessionAware {
+
+	CustomerDAO dao = new CustomerDAO();
 	Customer customer = new Customer();
-	
-	//가입시 입력 값 
+
+	// 가입시 입력 값
 	private String custid;
 	private String pw;
 	private String name;
@@ -21,14 +24,17 @@ public class CustomerAction extends ActionSupport {
 	private String rd;
 	private String identify;
 	private String addr;
-	
-	//아이디 체크
-	private String checkedID; 
-	private boolean checkResult; 
-	
-	//접속자목록 
-	private ArrayList<Customer> cusList; 
-	
+
+	// 아이디 체크
+	private String checkedID;
+	private boolean checkResult;
+
+	// 정보수정 세션사용
+	private Map<String, Object> session = new HashMap<String, Object>();
+
+	// 접속자목록
+	private ArrayList<Customer> cusList;
+
 	public String execute() {
 		System.out.println("실행");
 		return SUCCESS;
@@ -36,44 +42,72 @@ public class CustomerAction extends ActionSupport {
 
 	public String insertCustomer() {
 		System.out.println("insertCustomer 실행");
-		customer = new Customer(custid, pw, name, mail, rd, identify,addr); 
+		this.customer.setCustid(custid);
 		boolean result = dao.insertCustomer(customer);
-		System.out.println("등록성공여부 : "+result);
+		System.out.println("등록성공여부 : " + result);
 		return SUCCESS;
 	}
-	
-	
-	public String selectCusIf() throws Exception{
+
+	public String selectCusIf() throws Exception {
 		System.out.println("selectCusIf 실행");
-		customer.setCustid("vvv");
+		System.out.println("왜 안들어있는거야?" + custid);
+		System.out.println("왜 안들어있는거야?" + customer);
 		this.customer = dao.selectCusIf(customer);
 		System.out.println(customer);
-		
+
 		return SUCCESS;
 	}
-	
-	public String idCheck() throws Exception{
+
+	public String idCheck() throws Exception {
 		System.out.println("idCheck 실행");
 		checkResult = dao.selectCusById(checkedID);
-		return SUCCESS; 
+		return SUCCESS;
 	}
-	
-	public String selectCusList() throws Exception{
+
+	public String selectCusList() throws Exception {
 		System.out.println("selectCusList 실행");
 		cusList = dao.list("private");
-		System.out.println("리스트(액션) : "+cusList);
-		return SUCCESS; 
+		System.out.println("리스트(액션) : " + cusList);
+		return SUCCESS;
 	}
-	
-	
-	public String login() throws Exception{ 
-		
-		return LOGIN; 
+
+	public String update() throws Exception {
+
+		System.out.println("update 실행");
+		if (!session.get("loginId").equals("")) {
+			System.out.println("update 비지니스 로직 실행");
+			// this.customer = new Customer(custid, pw, name, mail, rd,
+			// identify, addr);
+			this.customer.setCustid(custid);
+			// 찾기(찾아서 객체가져오기)
+			Customer chk = dao.selectCusIf(customer);
+
+			if (chk != null) {
+				// 갱신
+				this.customer = new Customer(custid, pw, name, mail, rd, identify, addr);
+				System.out.println("새로 넣을 객체데이터" + customer);
+				boolean result = dao.updateCustomer(customer);
+				System.out.println("갱신성공여부 : " + result);
+			}
+		}
+		return SUCCESS;
 	}
-	
-	
-	
-	//get&set
+
+	// get&set
+
+	public Map<String, Object> getSession() {
+		return session;
+	}
+
+	@Override
+	public void setSession(Map<String, Object> session) {
+		this.session = session;
+	}
+
+	public String login() throws Exception {
+
+		return LOGIN;
+	}
 
 	public CustomerDAO getDao() {
 		return dao;
@@ -171,13 +205,4 @@ public class CustomerAction extends ActionSupport {
 		this.cusList = cusList;
 	}
 
-
-
-
-
-
-
-	
-	
-		
 }

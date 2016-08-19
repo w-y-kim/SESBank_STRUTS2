@@ -11,7 +11,6 @@
 * {
 	margin: 0;
 	padding: 0;
-	
 }
 
 table, tr {
@@ -20,11 +19,18 @@ table, tr {
 	position: relative;
 	text-align: center;
 	border-collapse: collapse;
-	border: 3px aqua solid;
+	/* 	border: 3px aqua solid; */
 }
-
+tr.head{
+	background-color:aqua;
+}
 th, td {
-	border: 3px aqua solid;
+	/* border: 3px aqua solid; */
+	border-bottom: 3px solid aqua;
+	line-height:40px;
+}
+#col1,#col3,#col5{
+	background-color:auqa;
 }
 
 div.control {
@@ -46,7 +52,7 @@ div.control:hover {
 div.button {
 	margin-top: 10px;
 	margin-right: 100px;
-	margin-bottom:50px;
+	margin-bottom: 50px;
 }
 
 a {
@@ -74,21 +80,28 @@ li {
 	float: left;
 }
 </style>
+
 </head>
 <body>
 
-
-	<table border="1">
+	<table>
 		<caption>
 			<h1>게시판</h1>
 		</caption>
-		<tr>
+		<col id="col1">
+		<col id="col2">
+		<col id="col3">
+		<col id="col4">
+		<col id="col5">
+		
+		<tr class="head">
 			<th>번호</th>
 			<th>제목</th>
 			<th>작성자</th>
 			<th>조회수</th>
 			<th>작성일</th>
 		</tr>
+
 
 		<c:forEach var="i" items="${list}">
 			<tr>

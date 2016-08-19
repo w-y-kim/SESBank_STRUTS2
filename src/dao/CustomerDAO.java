@@ -52,10 +52,12 @@ public class CustomerDAO {
 	}
 
 	public Customer selectCusIf(Customer customer) {
-		Customer result = null;
+		Customer result = new Customer(); 
 		try {
+			System.out.println(customer+"파라미터값");
 			sqlSess = sqlSessfac.openSession();
 			result = sqlSess.selectOne("Customer.selectCusIf", customer);
+			System.out.println("dao에서 찾은 회원 데이터 : "+result);
 			sqlSess.commit();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -83,4 +85,38 @@ public class CustomerDAO {
 
 		return result;
 	}
+	
+	public Customer checkLoginUser(Customer cus){
+		System.out.println("CUS_DAO : checkLoginUser(회원확인) 실행 ");
+		Customer result = null;
+		
+		try{
+			sqlSess = sqlSessfac.openSession();	
+			result = sqlSess.selectOne("Customer.checkLogin",cus); 
+			sqlSess.commit();
+			
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			if(sqlSess != null)sqlSess.close();
+		}
+		return result; 
+	}
+
+	public boolean updateCustomer(Customer customer) {
+		boolean result = false; 
+		try{
+			sqlSess = sqlSessfac.openSession();
+			int data = sqlSess.update("Customer.update", customer);
+			if(data !=0){result = true;}
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			if(sqlSess != null)sqlSess.close();
+		}
+		
+		return result;
+	}
+	
 }

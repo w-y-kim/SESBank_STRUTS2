@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="s" uri="/struts-tags"%>
 <!doctype html>
 <head>
 <meta charset="UTF-8" lang="ko">
@@ -9,25 +10,34 @@
 	rel="stylesheet">
 
 <link rel="stylesheet" href="main.css">
+
 </head>
 
 <body>
+
 	<header id="main_header">
 
 		<hgroup id="title">
 			<a href="index.action">
-			
-			<h1 style="background-color:aqua;text-align:center;border:5px dotted black;top: 50%;height::50px;margin-top:25px;">BMO은행</h1>
+
+				<h1
+					style="background-color: aqua; text-align: center; border: 5px dotted black; top: 50%; height: :50px; margin-top: 25px;">BMO은행</h1>
 			</a>
 			<h2>Struts + myBatis</h2>
 		</hgroup>
 		<nav id="main_gnb">
 			<!--global navigation bar-->
+			<div>
+				<s:property value="%{#session.loginName}" />
+				<s:property value="msg" /><!-- 인덱스 이동하면 초기화되는 문제 -->
+				<%-- EL로 쓰려면 그냥 이렇게 하지만.. ${msg} --%>
+
+			</div>
 			<ul>
 				<li><a href="join.action">가입</a></li>
-				<li><a href="">로그인</a></li>
-				<li><a href="">정보수정</a></li>
-				<li><a href="">로그아웃</a></li>
+				<li><a href="login.action" >로그인</a></li>
+				<li><a href="updateform.action">정보수정</a></li>
+				<li><a href="logout.action">로그아웃</a></li>
 				<li><a href="list.action">회원조회</a></li>
 			</ul>
 
@@ -54,8 +64,7 @@
 	<div id="content">
 		<section id="main_section">
 
-			<br />
-			<br />
+			<br /> <br />
 			<h1>Main section</h1>
 			<c:if test="${board.boardnum ne null && board.boardnum != 0 }">
 				<article class="main_article">
@@ -70,7 +79,7 @@
 					<jsp:include page="/bbs/BoardList.jsp"></jsp:include>
 				</article>
 			</c:if>
-			
+
 			<c:if test="${cusList ne null}">
 				<article class="main_article">
 					<jsp:include page="/form/CustomerList.jsp"></jsp:include>
@@ -83,7 +92,7 @@
 				<h3>게시판을 선택해주세요. 어차피 1개 밖에 없지만..</h3>
 			</c:if>
 
-			<div style="margin-top:50px;margin-bottom:100px">
+			<div style="margin-top: 50px; margin-bottom: 100px">
 				<jsp:include page="/bmo.html"></jsp:include>
 			</div>
 		</section>
@@ -93,10 +102,12 @@
 
 
 	<footer id="main_footer">
-		<%String absolutePath = application.getRealPath("");%><%=absolutePath%>
+		<%
+			String absolutePath = application.getRealPath("");
+		%><%=absolutePath%>
 		<h3>HTML5 + CSS3 Basic</h3>
 		<address>website layout basic</address>
-	
+
 
 	</footer>
 </body>

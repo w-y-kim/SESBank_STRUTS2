@@ -18,9 +18,8 @@ public class Customer {
 		this.email = email;
 		this.division = division;
 		this.idno = idno;
-		this.address = address;
+		this.address = address;			
 	}
-
 	
 	public String getCustid() {
 		return custid;

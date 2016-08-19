@@ -25,7 +25,7 @@
 	</package>
 
 
-	<package name="cus" namespace="/" extends="struts-default">
+	<package name="joinActionPackage" namespace="/" extends="struts-default">
 
 		<action name="join">
 			<result>/form/join.jsp</result>
@@ -37,15 +37,39 @@
 		<action name="idcheck" class="action.CustomerAction" method="idCheck">
 			<result>/form/idCheck.jsp</result>
 		</action>
-	
-		
-	
 		<action name="joinResult" class="action.CustomerAction" method="insertCustomer">
 			<result name="success">index.jsp</result>
 		</action>
+		<action name="updateform">
+			<result>/form/update.jsp</result><!-- -->
+		</action>
+		<action name="update" class="action.CustomerAction" method="update">
+			<result name="success">/index.jsp</result>
+		</action>
+	</package>
 
 
-		<action name="selectCusIf" class="action.CustomerAction" method="selectCusIf">
+	<package name="loginActionPackage" namespace="/" extends="struts-default">
+		<!-- 로그인 -->
+		<action name="login">
+			<result>/form/login.jsp</result>
+		</action>
+
+		<action name="loginResult" class="action.LoginAction">
+			<result name="input">/form/login.jsp</result><!-- -->
+			<result name="success">/index.jsp</result>
+		</action>
+
+		<!-- -->
+		<action name="logout" class="action.LoginAction" method="logout">
+			<result name="input">/index.jsp</result><!-- -->
+			<result name="success">/index.jsp</result>
+		</action>
+
+
+
+		<action name="selectCusIf" class="action.CustomerAction"
+			method="selectCusIf">
 			<result name="success">index.jsp</result>
 		</action>
 		<!-- 회원조회 -->
